@@ -1,0 +1,12 @@
+{
+  "name": "lsw-console-hooker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "console-hooker-api.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,13 @@
+<div class="console-hooker" :class="{hide:!is_shown}">
+    <div class="console_viewer">
+        <div class="console_box">
+            <div class="console_box_title" style="display: flex; flex-direction: row; width: 100%; align-items: center;">
+                <span style="flex: 100;">console hooker</span>
+                <span style="flex: 1;">
+                    <button class="mini" v-on:click="hide">X</button>
+                </span>
+            </div>
+            <div class="console_box_output" id="lsw-console-hooker-output"></div>
+        </div>
+    </div>
+</div>
