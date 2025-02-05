@@ -16,7 +16,7 @@ Vue.component("LswConsoleHooker", {
     }
   },
   mounted() {
-    // this.instance = new ConsoleHooker("lsw-console-hooker-output");
+    this.instance = new ConsoleHooker("lsw-console-hooker-output");
     this.$vue.prototype.$consoleHooker = this;
     this.$window.LswConsoleHooker = this;
   },

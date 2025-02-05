@@ -11,23 +11,27 @@
     left: 30px;
     bottom: 30px;
     padding: 4px;
-    
 }
 .console-hooker .console_box {
     max-height: 120px;
-    overflow: scroll;
     font-size: 12px;
     color: black;
-    background-color: rgba(255,255,255,0.8);
+    background-color: rgba(255,255,255,0.6);
     border: 3px double #030;
     border-radius: 2pt;
     text-shadow: 0 0 1px black;
+    display: flex;
+    flex-direction: column;
 }
 .console_box_title {
     padding: 4px;
-    background-color: rgba(0,0,0,0.7);
+    background-color: rgba(0,0,0,0.6);
     color: white;
+}
+.console_box_output_container {
+    overflow: scroll;
 }
 .console_box_output {
     padding: 4px;
+    flex: 100;
 }
