@@ -32,8 +32,8 @@
 
     formatError(error) {
       let errorMessage = "";
-      errorMessage += "Error: " +  error.name + ": " + error.message;
-      if(error.location) {
+      errorMessage += "Error: " + error.name + ": " + error.message;
+      if (error.location) {
         errorMessage += JSON.stringify({
           found: error.found,
           expected: error.expected,
@@ -43,21 +43,46 @@
       return errorMessage;
     }
 
+    consoleReducer() {
+      return (arg) => {
+        if (typeof arg === 'object') {
+          if (arg instanceof Error) {
+            return this.formatError(arg);
+          } else {
+            const seen = new WeakSet();
+            return JSON.stringify(arg, function (key, value) {
+              if (typeof value === "object") {
+                if (seen.has(value)) {
+                  return "[Circular]";
+                }
+                if (value !== null) {
+                  seen.add(value);
+                }
+              }
+              return value;
+            }, 2);
+          }
+        } else {
+          return arg;
+        }
+      };
+    }
+
     writeToHtml(method, args) {
       // Do not log from this method or it becomes recursive:
       const message = document.createElement('div');
       message.className = `console-${method}`;
-      message.textContent = `[${this.messageCounter++}] ${args.map(arg => (typeof arg === 'object' ? arg instanceof Error ? this.formatError(arg) : JSON.stringify(arg, null, 2) : arg)).join(' ')}`;
+      message.textContent = `[${this.messageCounter++}] ${args.map(this.consoleReducer()).join(' ')}`;
       const outputElement = document.getElementById(this.outputElementId);
-      if(!outputElement) {
+      if (!outputElement) {
         // console.log("no console hooker output element found");
         return;
       }
       const subnodes = outputElement.children;
       const subnodesLength = outputElement.children.length;
       const hasMoreThan100 = outputElement.children.length > 100;
-      if(hasMoreThan100) {
-        for(let index=subnodes.length-1; index>50; index--) {
+      if (hasMoreThan100) {
+        for (let index = subnodes.length - 1; index > 50; index--) {
           const subnode = subnodes[index];
           subnode.remove();
         }
