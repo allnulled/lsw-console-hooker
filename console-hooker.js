@@ -17,6 +17,10 @@ Vue.component("LswConsoleHooker", {
   },
   mounted() {
     this.instance = new ConsoleHooker("lsw-console-hooker-output");
+    if(process.env.NODE_ENV !== "development") {
+      // !@DESCOMENTAR: para restaurar consola (OFUSCA LOGS EN desarrollo)
+      this.instance.restoreConsole();
+    }
     this.$vue.prototype.$consoleHooker = this;
     this.$window.LswConsoleHooker = this;
   },
